@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019.
+  ~ Developer: Klainti brakai
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:background="?attr/colorPrimaryDark"
+             android:layout_width="match_parent"
+             android:gravity="bottom"
+             android:padding="@dimen/navigation_drawer_header_padding"
+             android:layout_height="@dimen/navigation_drawer_header_height">
+
+    <ImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="@dimen/navigation_drawer_image_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_person_black_48dp"
+            android:contentDescription="@string/navigation_drawer_header_content_description"/>
+
+    <TextView
+            android:id="@+id/profile_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:text="@string/navigation_drawer_header_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+</FrameLayout>

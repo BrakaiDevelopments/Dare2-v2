@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019.
+  ~ Developer: Klainti brakai
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_graph"
+            app:startDestination="@id/homeFragment">
+    <fragment android:id="@+id/homeFragment" android:name="gr.brakaidevelopments.dare2.home.HomeFragment"
+              android:label="Dashboard" tools:layout="@layout/fragment_home"/>
+</navigation>

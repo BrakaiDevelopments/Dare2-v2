@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "936473270997",
+    "firebase_url": "https://dare2-d9e56.firebaseio.com",
+    "project_id": "dare2-d9e56",
+    "storage_bucket": "dare2-d9e56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936473270997:android:b52ac11599c59877",
+        "android_client_info": {
+          "package_name": "gr.brakaidevelopments.dare2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936473270997-o1b0sd3am61sggv1jk3o05imejtgpisr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gr.brakaidevelopments.dare2",
+            "certificate_hash": "d9a8dae1713c105ea15b5dfcfcaffaf16648f041"
+          }
+        },
+        {
+          "client_id": "936473270997-le64gdb58m9ku8hg2sa4m4262d3lmm5g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gr.brakaidevelopments.dare2",
+            "certificate_hash": "bd1ac466ac6c4792010044123c3f56c2ac008084"
+          }
+        },
+        {
+          "client_id": "936473270997-fhtd1d4cgif32fbht14nbosjhtccim9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4_cP7Ywo2AGHMeAMJJcpxncLNcibDGsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936473270997-fhtd1d4cgif32fbht14nbosjhtccim9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
