@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import gr.brakaidevelopments.dare2.base.BaseFragment
 import gr.brakaidevelopments.dare2.databinding.FragmentHomeBinding
-import org.koin.androidx.viewmodel.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.

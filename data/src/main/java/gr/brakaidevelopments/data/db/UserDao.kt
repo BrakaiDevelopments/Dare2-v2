@@ -16,25 +16,28 @@ import java.util.*
 @Dao
 abstract class UserDao : BaseDao<UserEntity> {
 
-    @Query("SELECT * FROM Users WHERE id=:userId")
-    abstract suspend fun getUserByID(userId: UUID): UserEntity
+    @Query("SELECT * FROM User WHERE user_id=:userId")
+    abstract suspend fun getUserByID(userId: UUID): UserEntity?
 
-    @Query("SELECT * FROM Users WHERE email=:email")
-    abstract suspend fun getUserByEmail(email: String): UserEntity
+    @Query("SELECT * FROM User WHERE email=:email")
+    abstract suspend fun getUserByEmail(email: String): UserEntity?
 
-    @Query("SELECT * FROM Users WHERE username LIKE :email")
-    abstract suspend fun getUserByUsername(email: String): UserEntity
+    @Query("SELECT * FROM User WHERE username LIKE :email")
+    abstract suspend fun getUserByUsername(email: String): UserEntity?
 
-    @Query("SELECT profile_image FROM Users WHERE id=:userId")
-    abstract suspend fun getUserProfileImage(userId: UUID): Uri
+    @Query("SELECT profile_image FROM User WHERE user_id=:userId")
+    abstract suspend fun getUserProfileImage(userId: UUID): Uri?
 
-    @Query("SELECT profile_image FROM Users WHERE id=:userId")
-    abstract suspend fun getUserStatus(userId: UUID): UserProfileState
+    @Query("SELECT status FROM User WHERE user_id=:userId")
+    abstract suspend fun getUserStatus(userId: UUID): UserProfileState?
 
-    @Query("SELECT * FROM Users WHERE countryName LIKE :countryName ")
-    abstract suspend fun getUserByCountryName(countryName: String): UserEntity
+    @Query("SELECT * FROM User WHERE status = :state")
+    abstract suspend fun getUserByStatus(state: UserProfileState): List<UserEntity>
 
-    @Query("SELECT username, password FROM Users WHERE id=:userId")
-    abstract suspend fun getUserCredentialsByID(userId: UUID): UserCredentials
+    @Query("SELECT * FROM User WHERE countryName LIKE :countryName ")
+    abstract suspend fun getUserByCountryName(countryName: String): List<UserEntity>
+
+    @Query("SELECT username, password FROM User WHERE user_id=:userId")
+    abstract suspend fun getUserCredentialsByID(userId: UUID): UserCredentials?
 
 }

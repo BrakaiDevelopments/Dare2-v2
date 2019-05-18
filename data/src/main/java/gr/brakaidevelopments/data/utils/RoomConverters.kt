@@ -8,6 +8,7 @@ package gr.brakaidevelopments.data.utils
 import android.net.Uri
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import gr.brakaidevelopments.data.model.UserProfileState
 import gr.brakaidevelopments.domain.utils.fromJson
 import java.util.*
 
@@ -18,13 +19,13 @@ object RoomConverters {
 
     @JvmStatic
     @TypeConverter
-    fun listToJson(uuid: UUID): String {
+    fun uuidToJson(uuid: UUID): String {
         return gson.toJson(uuid)
     }
 
     @JvmStatic
     @TypeConverter
-    fun listFromJson(uuid: String): UUID {
+    fun uuidFromJson(uuid: String): UUID {
         return gson.fromJson(uuid)
     }
 
@@ -50,6 +51,18 @@ object RoomConverters {
     @TypeConverter
     fun uriFromJson(uri: String): Uri {
         return Uri.parse(uri)
+    }
+
+    @JvmStatic
+    @TypeConverter
+    fun userStatusToJson(userStatus: UserProfileState): String {
+        return userStatus.toString()
+    }
+
+    @JvmStatic
+    @TypeConverter
+    fun userStatusFromJson(userStatus: String): UserProfileState {
+        return UserProfileState.valueOf(userStatus)
     }
 
 

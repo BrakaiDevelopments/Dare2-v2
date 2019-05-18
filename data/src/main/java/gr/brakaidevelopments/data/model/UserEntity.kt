@@ -11,35 +11,37 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 @Entity(
-    tableName = "Users",
-    primaryKeys = ["id_", "username"],
+    tableName = "User",
     foreignKeys = [ForeignKey(
-        entity = LeaderBoard::class,
+        entity = LeaderBoardEntity::class,
         parentColumns = arrayOf("leaderBoard_id"),
-        childColumns = arrayOf("id_"),
+        childColumns = arrayOf("leaderBoard_id"),
         onDelete = ForeignKey.CASCADE
     )],
-    indices = [Index(value = ["username", "email", "country_name"])]
+    indices = [
+        Index(value = ["countryName"], unique = false),
+        Index(value = ["username"], unique = true),
+        Index(value = ["email"], unique = true),
+        Index(value = ["leaderBoard_id"], unique = false)
+    ]
 )
 data class UserEntity(
-    @ColumnInfo(name = "id") @SerializedName("id_")
+    @PrimaryKey @ColumnInfo(name = "user_id") @SerializedName("user_id")
     val id: UUID = UUID.randomUUID(),
     @ColumnInfo(name = "username") @SerializedName("username")
-    val username: String,
+    var username: String,
     @ColumnInfo(name = "password") @SerializedName("password")
     var password: String,
     @ColumnInfo(name = "email") @SerializedName("email")
     var email: String,
     @ColumnInfo(name = "birthday") @SerializedName("birthday")
     var birthday: Date,
-    @Embedded
-    @ColumnInfo(name = "country") @SerializedName("country")
+    @Embedded @SerializedName("country")
     var country: CountryEntity,
     @ColumnInfo(name = "leaderBoard_id") @SerializedName("leaderBoard_id")
     var leaderBoardId: UUID,
     @ColumnInfo(name = "profile_image") @SerializedName("profile_image")
     var profileImage: Uri,
-    @Embedded
-    @ColumnInfo(name = "user_status") @SerializedName("user_status")
+    @SerializedName("user_status")
     var status: UserProfileState
 )

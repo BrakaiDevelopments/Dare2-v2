@@ -1,0 +1,302 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "e23b2d9e199b3a3b89c1473b4fd01e89",
+    "entities": [
+      {
+        "tableName": "User",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_id` TEXT NOT NULL, `username` TEXT NOT NULL, `password` TEXT NOT NULL, `email` TEXT NOT NULL, `birthday` TEXT NOT NULL, `leaderBoard_id` TEXT NOT NULL, `profile_image` TEXT NOT NULL, `status` TEXT NOT NULL, `countryId` TEXT NOT NULL, `countryCode` TEXT NOT NULL, `countryName` TEXT NOT NULL, PRIMARY KEY(`user_id`), FOREIGN KEY(`leaderBoard_id`) REFERENCES `LeaderBoard`(`leaderBoard_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "user_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "username",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "birthday",
+            "columnName": "birthday",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "leaderBoardId",
+            "columnName": "leaderBoard_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profileImage",
+            "columnName": "profile_image",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "country.countryId",
+            "columnName": "countryId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "country.countryCode",
+            "columnName": "countryCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "country.countryName",
+            "columnName": "countryName",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "user_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_User_countryName",
+            "unique": false,
+            "columnNames": [
+              "countryName"
+            ],
+            "createSql": "CREATE  INDEX `index_User_countryName` ON `${TABLE_NAME}` (`countryName`)"
+          },
+          {
+            "name": "index_User_username",
+            "unique": true,
+            "columnNames": [
+              "username"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_User_username` ON `${TABLE_NAME}` (`username`)"
+          },
+          {
+            "name": "index_User_email",
+            "unique": true,
+            "columnNames": [
+              "email"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_User_email` ON `${TABLE_NAME}` (`email`)"
+          },
+          {
+            "name": "index_User_leaderBoard_id",
+            "unique": false,
+            "columnNames": [
+              "leaderBoard_id"
+            ],
+            "createSql": "CREATE  INDEX `index_User_leaderBoard_id` ON `${TABLE_NAME}` (`leaderBoard_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "LeaderBoard",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "leaderBoard_id"
+            ],
+            "referencedColumns": [
+              "leaderBoard_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "LeaderBoard",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`leaderBoard_id` TEXT NOT NULL, `points` INTEGER NOT NULL, `challenges_participated` INTEGER NOT NULL, `challenges_completed` INTEGER NOT NULL, PRIMARY KEY(`leaderBoard_id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "leaderBoard_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "points",
+            "columnName": "points",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "num_of_participates",
+            "columnName": "challenges_participated",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "completed_challenges",
+            "columnName": "challenges_completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "leaderBoard_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Comment",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comment_id` TEXT NOT NULL, `parent_id` TEXT NOT NULL, `message` TEXT NOT NULL, `up_votes` INTEGER NOT NULL, `down_votes` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `user_id` TEXT NOT NULL, `username` TEXT NOT NULL, `password` TEXT NOT NULL, `email` TEXT NOT NULL, `birthday` TEXT NOT NULL, `leaderBoard_id` TEXT NOT NULL, `profile_image` TEXT NOT NULL, `status` TEXT NOT NULL, `countryId` TEXT NOT NULL, `countryCode` TEXT NOT NULL, `countryName` TEXT NOT NULL, PRIMARY KEY(`comment_id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "comment_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parentID",
+            "columnName": "parent_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "message",
+            "columnName": "message",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "UpVotes",
+            "columnName": "up_votes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "DownVotes",
+            "columnName": "down_votes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.id",
+            "columnName": "user_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.username",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.birthday",
+            "columnName": "birthday",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.leaderBoardId",
+            "columnName": "leaderBoard_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.profileImage",
+            "columnName": "profile_image",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.country.countryId",
+            "columnName": "countryId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.country.countryCode",
+            "columnName": "countryCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.country.countryName",
+            "columnName": "countryName",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "comment_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_Comment_message",
+            "unique": false,
+            "columnNames": [
+              "message"
+            ],
+            "createSql": "CREATE  INDEX `index_Comment_message` ON `${TABLE_NAME}` (`message`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e23b2d9e199b3a3b89c1473b4fd01e89\")"
+    ]
+  }
+}

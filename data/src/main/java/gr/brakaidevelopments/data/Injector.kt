@@ -5,6 +5,9 @@
 
 package gr.brakaidevelopments.data
 
+import gr.brakaidevelopments.data.db.AppDatabase
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val retrofitModule = module {
@@ -17,7 +20,10 @@ val retrofitModule = module {
 }
 
 val databaseModule = module {
-
+    single { AppDatabase(androidContext()) }
+    single { get<AppDatabase>().userDao() }
+    single { get<AppDatabase>().leaderBoardDao() }
+    single(named("Test")) { AppDatabase.getInMemoryDatabase(androidContext()) }
 }
 
 val dataRepositoryModule = module {
