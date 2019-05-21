@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e23b2d9e199b3a3b89c1473b4fd01e89",
+    "identityHash": "c7baef274ac673faa6e74e8f8d27830d",
     "entities": [
       {
         "tableName": "User",
@@ -291,12 +291,98 @@
           }
         ],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Challenge",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`challenge_id` TEXT NOT NULL, `title` TEXT NOT NULL, `sub_title` TEXT NOT NULL, `description` TEXT NOT NULL, `status` TEXT NOT NULL, `up_votes` INTEGER NOT NULL, `down_votes` INTEGER NOT NULL, `cover_image` TEXT NOT NULL, `country` TEXT, `county` TEXT, `city` TEXT, `address` TEXT, PRIMARY KEY(`challenge_id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "challenge_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subTitle",
+            "columnName": "sub_title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "upVotes",
+            "columnName": "up_votes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "downVotes",
+            "columnName": "down_votes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "coverImage",
+            "columnName": "cover_image",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "location.country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location.county",
+            "columnName": "county",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location.city",
+            "columnName": "city",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location.address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "challenge_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e23b2d9e199b3a3b89c1473b4fd01e89\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c7baef274ac673faa6e74e8f8d27830d\")"
     ]
   }
 }

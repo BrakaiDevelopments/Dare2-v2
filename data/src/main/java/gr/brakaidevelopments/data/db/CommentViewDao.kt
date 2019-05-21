@@ -14,6 +14,6 @@ abstract class CommentViewDao {
     abstract suspend fun getCommentsByParentId(commentID: UUID): List<CommentEntity>
 
     @Query("SELECT * FROM Comment WHERE parent_id = :commentID")
-    abstract suspend fun getCommentsByParentIdLiveData(commentID: UUID): LiveData<List<CommentEntity>>
+    abstract fun getCommentsByParentIdLiveData(commentID: UUID): LiveData<List<CommentEntity>>
 
 }

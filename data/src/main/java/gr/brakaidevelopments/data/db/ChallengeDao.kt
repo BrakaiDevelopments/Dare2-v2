@@ -15,7 +15,7 @@ abstract class ChallengeDao : BaseDao<ChallengeEntity> {
     abstract suspend fun getChallengeById(challengeId: UUID): ChallengeEntity?
 
     @Query("SELECT * FROM challenge WHERE challenge_id =:challengeId")
-    abstract suspend fun getChallengeByIdLiveData(challengeId: UUID): LiveData<ChallengeEntity>
+    abstract fun getChallengeByIdLiveData(challengeId: UUID): LiveData<ChallengeEntity>
 
     @Query("SELECT * FROM challenge WHERE title LIKE :title OR sub_title LIKE :title")
     abstract suspend fun getChallengesByTitleOrSubTitle(title: String): List<ChallengeEntity>
@@ -27,13 +27,13 @@ abstract class ChallengeDao : BaseDao<ChallengeEntity> {
     abstract suspend fun getChallengeUpVotesById(challengeId: UUID): Long?
 
     @Query("SELECT up_votes FROM challenge WHERE challenge_id =:challengeId")
-    abstract suspend fun getChallengeUpVotesByIdLiveData(challengeId: UUID): LiveData<Long>
+    abstract fun getChallengeUpVotesByIdLiveData(challengeId: UUID): LiveData<Long>
 
     @Query("SELECT down_votes FROM challenge WHERE challenge_id =:challengeId")
-    abstract suspend fun getChallengeDownVotesById(challengeId: UUID): Long
+    abstract suspend fun getChallengeDownVotesById(challengeId: UUID): Long?
 
     @Query("SELECT down_votes FROM challenge WHERE challenge_id =:challengeId")
-    abstract suspend fun getChallengeDownVotesByIdLiveData(challengeId: UUID): LiveData<Long>
+    abstract fun getChallengeDownVotesByIdLiveData(challengeId: UUID): LiveData<Long>
 
     @Query("SELECT cover_image FROM challenge WHERE challenge_id =:challengeId")
     abstract suspend fun getChallengeCoverImageyId(challengeId: UUID): Uri?

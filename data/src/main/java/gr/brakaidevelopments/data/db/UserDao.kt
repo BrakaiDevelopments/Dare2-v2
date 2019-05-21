@@ -6,6 +6,7 @@
 package gr.brakaidevelopments.data.db
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import gr.brakaidevelopments.data.model.UserCredentials
@@ -19,8 +20,14 @@ abstract class UserDao : BaseDao<UserEntity> {
     @Query("SELECT * FROM User WHERE user_id=:userId")
     abstract suspend fun getUserByID(userId: UUID): UserEntity?
 
+    @Query("SELECT * FROM User WHERE user_id=:userId")
+    abstract fun getUserByIDLiveData(userId: UUID): LiveData<UserEntity>
+
     @Query("SELECT * FROM User WHERE email=:email")
     abstract suspend fun getUserByEmail(email: String): UserEntity?
+
+    @Query("SELECT * FROM User WHERE email=:email")
+    abstract fun getUserByEmailLiveData(email: String): LiveData<UserEntity>
 
     @Query("SELECT * FROM User WHERE username LIKE :email")
     abstract suspend fun getUserByUsername(email: String): UserEntity?
