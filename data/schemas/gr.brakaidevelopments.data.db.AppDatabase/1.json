@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c7baef274ac673faa6e74e8f8d27830d",
+    "identityHash": "82a97915f7bf7e6fc5a041d8422c45bc",
     "entities": [
       {
         "tableName": "User",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_id` TEXT NOT NULL, `username` TEXT NOT NULL, `password` TEXT NOT NULL, `email` TEXT NOT NULL, `birthday` TEXT NOT NULL, `leaderBoard_id` TEXT NOT NULL, `profile_image` TEXT NOT NULL, `status` TEXT NOT NULL, `countryId` TEXT NOT NULL, `countryCode` TEXT NOT NULL, `countryName` TEXT NOT NULL, PRIMARY KEY(`user_id`), FOREIGN KEY(`leaderBoard_id`) REFERENCES `LeaderBoard`(`leaderBoard_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_id` TEXT NOT NULL, `username` TEXT NOT NULL, `password` TEXT NOT NULL, `email` TEXT NOT NULL, `birthday` TEXT NOT NULL, `leaderBoard_id` TEXT NOT NULL, `profile_image` TEXT NOT NULL, `userProfileState` TEXT NOT NULL, `countryId` TEXT NOT NULL, `countryCode` TEXT NOT NULL, `countryName` TEXT NOT NULL, PRIMARY KEY(`user_id`), FOREIGN KEY(`leaderBoard_id`) REFERENCES `LeaderBoard`(`leaderBoard_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -51,8 +51,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "status",
-            "columnName": "status",
+            "fieldPath": "userProfileState",
+            "columnName": "userProfileState",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -169,11 +169,17 @@
       },
       {
         "tableName": "Comment",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comment_id` TEXT NOT NULL, `parent_id` TEXT NOT NULL, `message` TEXT NOT NULL, `up_votes` INTEGER NOT NULL, `down_votes` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `user_id` TEXT NOT NULL, `username` TEXT NOT NULL, `password` TEXT NOT NULL, `email` TEXT NOT NULL, `birthday` TEXT NOT NULL, `leaderBoard_id` TEXT NOT NULL, `profile_image` TEXT NOT NULL, `status` TEXT NOT NULL, `countryId` TEXT NOT NULL, `countryCode` TEXT NOT NULL, `countryName` TEXT NOT NULL, PRIMARY KEY(`comment_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comment_id` TEXT NOT NULL, `parent_challenge_id` TEXT NOT NULL, `parent_id` TEXT NOT NULL, `message` TEXT NOT NULL, `up_votes` INTEGER NOT NULL, `down_votes` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `user_id` TEXT NOT NULL, `username` TEXT NOT NULL, `password` TEXT NOT NULL, `email` TEXT NOT NULL, `birthday` TEXT NOT NULL, `leaderBoard_id` TEXT NOT NULL, `profile_image` TEXT NOT NULL, `userProfileState` TEXT NOT NULL, `countryId` TEXT NOT NULL, `countryCode` TEXT NOT NULL, `countryName` TEXT NOT NULL, PRIMARY KEY(`comment_id`), FOREIGN KEY(`parent_challenge_id`) REFERENCES `Challenge`(`challenge_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "comment_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "challengeID",
+            "columnName": "parent_challenge_id",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -250,8 +256,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "user.status",
-            "columnName": "status",
+            "fieldPath": "user.userProfileState",
+            "columnName": "userProfileState",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -290,11 +296,23 @@
             "createSql": "CREATE  INDEX `index_Comment_message` ON `${TABLE_NAME}` (`message`)"
           }
         ],
-        "foreignKeys": []
+        "foreignKeys": [
+          {
+            "table": "Challenge",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "parent_challenge_id"
+            ],
+            "referencedColumns": [
+              "challenge_id"
+            ]
+          }
+        ]
       },
       {
         "tableName": "Challenge",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`challenge_id` TEXT NOT NULL, `title` TEXT NOT NULL, `sub_title` TEXT NOT NULL, `description` TEXT NOT NULL, `status` TEXT NOT NULL, `up_votes` INTEGER NOT NULL, `down_votes` INTEGER NOT NULL, `cover_image` TEXT NOT NULL, `country` TEXT, `county` TEXT, `city` TEXT, `address` TEXT, PRIMARY KEY(`challenge_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`challenge_id` TEXT NOT NULL, `title` TEXT NOT NULL, `sub_title` TEXT NOT NULL, `description` TEXT NOT NULL, `challengeState` TEXT NOT NULL, `up_votes` INTEGER NOT NULL, `down_votes` INTEGER NOT NULL, `cover_image` TEXT NOT NULL, `country` TEXT, `county` TEXT, `city` TEXT, `address` TEXT, PRIMARY KEY(`challenge_id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -321,8 +339,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "status",
-            "columnName": "status",
+            "fieldPath": "challengeState",
+            "columnName": "challengeState",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -382,7 +400,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c7baef274ac673faa6e74e8f8d27830d\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"82a97915f7bf7e6fc5a041d8422c45bc\")"
     ]
   }
 }

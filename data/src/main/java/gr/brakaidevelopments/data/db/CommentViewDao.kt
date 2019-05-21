@@ -1,6 +1,7 @@
 package gr.brakaidevelopments.data.db
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import gr.brakaidevelopments.data.model.CommentEntity
@@ -15,5 +16,8 @@ abstract class CommentViewDao {
 
     @Query("SELECT * FROM Comment WHERE parent_id = :commentID")
     abstract fun getCommentsByParentIdLiveData(commentID: UUID): LiveData<List<CommentEntity>>
+
+    @Query("SELECT * FROM Comment WHERE parent_id = :commentID")
+    abstract fun getCommentsByParentIdPaged(commentID: UUID): DataSource.Factory<Int, CommentEntity>
 
 }

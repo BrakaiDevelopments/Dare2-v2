@@ -1,6 +1,7 @@
 package gr.brakaidevelopments.data.db
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import gr.brakaidevelopments.data.model.LeaderBoardEntity
@@ -8,6 +9,15 @@ import java.util.*
 
 @Dao
 abstract class LeaderBoardDao : BaseDao<LeaderBoardEntity> {
+
+    @Query("SELECT * FROM LeaderBoard")
+    abstract suspend fun getAllLeaderBoard() : List<LeaderBoardEntity>
+
+    @Query("SELECT * FROM LeaderBoard")
+    abstract fun getAllLeaderBoardLiveData(): LiveData<List<LeaderBoardEntity>>
+
+    @Query("SELECT * FROM LeaderBoard")
+    abstract fun getAllLeaderBoardPaged(): DataSource.Factory<Int, LeaderBoardEntity>
 
     @Query("SELECT * FROM LeaderBoard WHERE leaderBoard_id=:leaderBoardId")
     abstract suspend fun getLeaderBoardByID(leaderBoardId: UUID): LeaderBoardEntity?

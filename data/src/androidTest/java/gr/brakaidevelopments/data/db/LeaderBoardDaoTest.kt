@@ -120,7 +120,7 @@ class LeaderBoardDaoTest : KoinTest {
                 countryName = "Greece"
             ),
             leaderBoardId = leaderBoard.id,
-            status = UserProfileState.ACTIVE, profileImage = Uri.parse("https://via.placeholder.com/300/09f/fff.png")
+            userProfileState = UserProfileState.ACTIVE, profileImage = Uri.parse("https://via.placeholder.com/300/09f/fff.png")
         )
     }
 

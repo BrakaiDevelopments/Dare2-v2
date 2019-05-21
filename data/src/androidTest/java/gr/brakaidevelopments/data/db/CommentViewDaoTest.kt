@@ -40,14 +40,20 @@ class CommentViewDaoTest : KoinTest {
     @Test
     fun insertCommentsWithParentCommentThenRetrieveThemByParentId() {
         runBlocking {
+            database.challengeDao().insertItem(challenge)
             database.commentDao().insertItem(parentComment)
             database.commentDao().insertItems(
-                CommentEntity(user = user, message = "First-comment", createdAt = Date(), parentID = parentComment.id),
-                CommentEntity(user = user, message = "Second-comment", createdAt = Date(), parentID = parentComment.id),
-                CommentEntity(user = user, message = "Third-comment", createdAt = Date(), parentID = parentComment.id),
-                CommentEntity(user = user, message = "Forth-comment", createdAt = Date(), parentID = parentComment.id),
-                CommentEntity(user = user, message = "Fifth-comment", createdAt = Date(), parentID = UUID.randomUUID()),
-                CommentEntity(user = user, message = "Sixth-comment", createdAt = Date(), parentID = UUID.randomUUID())
+                CommentEntity(user = user, message = "First-comment", createdAt = Date(), parentID = parentComment.id, challengeID = challenge.id),
+                CommentEntity(user = user, message = "Second-comment", createdAt = Date(), parentID = parentComment.id,
+                    challengeID = challenge.id),
+                CommentEntity(user = user, message = "Third-comment", createdAt = Date(), parentID = parentComment.id,
+                    challengeID = challenge.id),
+                CommentEntity(user = user, message = "Forth-comment", createdAt = Date(), parentID = parentComment.id,
+                    challengeID = challenge.id),
+                CommentEntity(user = user, message = "Fifth-comment", createdAt = Date(), parentID = UUID.randomUUID(),
+                    challengeID = challenge.id),
+                CommentEntity(user = user, message = "Sixth-comment", createdAt = Date(), parentID = UUID.randomUUID(),
+                    challengeID = challenge.id)
             )
 
             val itemView = database.commentViewDao().getCommentsByParentId(parentComment.id)
@@ -59,6 +65,16 @@ class CommentViewDaoTest : KoinTest {
 
     companion object {
         val leaderBoard = LeaderBoardEntity()
+
+        val challenge = ChallengeEntity(
+            title = "Test",
+            subTitle = "Test",
+            description = "TEST",
+            coverImage = Uri.parse("https://via.placeholder.com/300/09f/fff.png"),
+            challengeState = ChallengeState.APPROVED,
+            location = LocationEntity("Greece", "Attica", "Athens", "Litous 9")
+        )
+
         val user = UserEntity(
             username = "Test",
             password = "Test",
@@ -69,11 +85,11 @@ class CommentViewDaoTest : KoinTest {
                 countryName = "Greece"
             ),
             leaderBoardId = leaderBoard.id,
-            status = UserProfileState.ACTIVE, profileImage = Uri.parse("https://via.placeholder.com/300/09f/fff.png")
+            userProfileState = UserProfileState.ACTIVE, profileImage = Uri.parse("https://via.placeholder.com/300/09f/fff.png")
         )
 
         val parentComment =
-            CommentEntity(user = user, message = "Parent comment", createdAt = Date(), parentID = UUID.randomUUID())
+            CommentEntity(user = user, message = "Parent comment", createdAt = Date(), parentID = UUID.randomUUID(), challengeID = challenge.id)
 
     }
 }

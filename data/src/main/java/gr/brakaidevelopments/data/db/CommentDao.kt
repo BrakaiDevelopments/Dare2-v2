@@ -1,6 +1,7 @@
 package gr.brakaidevelopments.data.db
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import gr.brakaidevelopments.data.model.CommentEntity
@@ -14,6 +15,15 @@ abstract class CommentDao : BaseDao<CommentEntity> {
 
     @Query("SELECT * FROM Comment WHERE comment_id=:commentID")
     abstract fun getCommentByIDLiveData(commentID: UUID): LiveData<CommentEntity>
+
+    @Query("SELECT * FROM Comment WHERE comment_id=:challengeId")
+    abstract suspend fun getCommentByChallengeID(challengeId: UUID): CommentEntity?
+
+    @Query("SELECT * FROM Comment WHERE comment_id=:challengeId")
+    abstract fun getCommentByChallengeIDLiveData(challengeId: UUID): LiveData<CommentEntity>
+
+    @Query("SELECT * FROM Comment WHERE comment_id=:challengeId")
+    abstract fun getCommentByChallengeIDPaged(challengeId: UUID): DataSource.Factory<Int ,CommentEntity>
 
     @Query("SELECT * FROM Comment WHERE user_id =:userId")
     abstract suspend fun getCommentsByUserID(userId: UUID): List<CommentEntity>

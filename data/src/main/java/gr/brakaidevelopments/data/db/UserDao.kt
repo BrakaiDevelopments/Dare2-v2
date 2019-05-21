@@ -35,10 +35,10 @@ abstract class UserDao : BaseDao<UserEntity> {
     @Query("SELECT profile_image FROM User WHERE user_id=:userId")
     abstract suspend fun getUserProfileImage(userId: UUID): Uri?
 
-    @Query("SELECT status FROM User WHERE user_id=:userId")
+    @Query("SELECT userProfileState FROM User WHERE user_id=:userId")
     abstract suspend fun getUserStatus(userId: UUID): UserProfileState?
 
-    @Query("SELECT * FROM User WHERE status = :state")
+    @Query("SELECT * FROM User WHERE userProfileState = :state")
     abstract suspend fun getUserByStatus(state: UserProfileState): List<UserEntity>
 
     @Query("SELECT * FROM User WHERE countryName LIKE :countryName ")

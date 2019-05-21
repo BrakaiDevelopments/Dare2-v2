@@ -5,9 +5,12 @@
 
 package gr.brakaidevelopments.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class CountryEntity(
     @SerializedName("country_id")
     val countryId: UUID = UUID.randomUUID(),
@@ -15,4 +18,4 @@ data class CountryEntity(
     var countryCode: String,
     @SerializedName("country_name")
     var countryName: String
-)
+) : Parcelable

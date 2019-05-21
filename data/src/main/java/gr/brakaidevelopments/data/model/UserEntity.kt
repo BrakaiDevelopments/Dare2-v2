@@ -6,10 +6,13 @@
 package gr.brakaidevelopments.data.model
 
 import android.net.Uri
+import android.os.Parcelable
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 @Entity(
     tableName = "User",
     foreignKeys = [ForeignKey(
@@ -43,5 +46,5 @@ data class UserEntity(
     @ColumnInfo(name = "profile_image") @SerializedName("profile_image")
     var profileImage: Uri,
     @SerializedName("user_status")
-    var status: UserProfileState
-)
+    var userProfileState: UserProfileState
+) : Parcelable

@@ -41,6 +41,7 @@ class CommentDaoTest : KoinTest {
     @Test
     fun insertCommentAndGetByID() {
         runBlocking {
+            database.challengeDao().insertItem(challenge)
             database.commentDao().insertItem(comment)
 
             val item = database.commentDao().getCommentByID(comment.id)
@@ -53,6 +54,7 @@ class CommentDaoTest : KoinTest {
     @Test
     fun insertCommentAndGetByMessage() {
         runBlocking {
+            database.challengeDao().insertItem(challenge)
             database.commentDao().insertItem(comment)
 
             val item = database.commentDao().getCommentsByMessage("%Test%")
@@ -65,6 +67,7 @@ class CommentDaoTest : KoinTest {
     @Test
     fun insertCommentAndGetByUserID() {
         runBlocking {
+            database.challengeDao().insertItem(challenge)
             database.commentDao().insertItem(comment)
 
             val item = database.commentDao().getCommentsByUserID(user.id)
@@ -81,6 +84,15 @@ class CommentDaoTest : KoinTest {
     companion object {
         val leaderBoard = LeaderBoardEntity()
 
+        val challenge = ChallengeEntity(
+            title = "Test",
+            subTitle = "Test",
+            description = "TEST",
+            coverImage = Uri.parse("https://via.placeholder.com/300/09f/fff.png"),
+            challengeState = ChallengeState.APPROVED,
+            location = LocationEntity("Greece", "Attica", "Athens", "Litous 9")
+        )
+
         val user = UserEntity(
             username = "Test",
             password = "Test",
@@ -91,11 +103,11 @@ class CommentDaoTest : KoinTest {
                 countryName = "Greece"
             ),
             leaderBoardId = leaderBoard.id,
-            status = UserProfileState.ACTIVE, profileImage = Uri.parse("https://via.placeholder.com/300/09f/fff.png")
+            userProfileState = UserProfileState.ACTIVE, profileImage = Uri.parse("https://via.placeholder.com/300/09f/fff.png")
         )
 
         val comment =
-            CommentEntity(user = user, message = "Test-comment", createdAt = Date(), parentID = UUID.randomUUID())
+            CommentEntity(user = user, message = "Test-comment", createdAt = Date(), parentID = UUID.randomUUID(), challengeID = challenge.id)
     }
 
 }
