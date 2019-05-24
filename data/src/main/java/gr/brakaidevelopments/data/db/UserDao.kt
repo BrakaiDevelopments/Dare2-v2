@@ -21,13 +21,13 @@ abstract class UserDao : BaseDao<UserEntity> {
     abstract suspend fun getUserByID(userId: UUID): UserEntity?
 
     @Query("SELECT * FROM User WHERE user_id=:userId")
-    abstract fun getUserByIDLiveData(userId: UUID): LiveData<UserEntity>
+    abstract fun getUserByIDLiveData(userId: UUID): LiveData<UserEntity?>
 
     @Query("SELECT * FROM User WHERE email=:email")
     abstract suspend fun getUserByEmail(email: String): UserEntity?
 
     @Query("SELECT * FROM User WHERE email=:email")
-    abstract fun getUserByEmailLiveData(email: String): LiveData<UserEntity>
+    abstract fun getUserByEmailLiveData(email: String): LiveData<UserEntity?>
 
     @Query("SELECT * FROM User WHERE username LIKE :email")
     abstract suspend fun getUserByUsername(email: String): UserEntity?

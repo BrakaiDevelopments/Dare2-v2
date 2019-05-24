@@ -22,7 +22,10 @@ val retrofitModule = module {
 val databaseModule = module {
     single { AppDatabase(androidContext()) }
     single { get<AppDatabase>().userDao() }
+    single { get<AppDatabase>().challengeDao() }
     single { get<AppDatabase>().leaderBoardDao() }
+    single { get<AppDatabase>().commentViewDao() }
+    single { get<AppDatabase>().commentDao() }
     single(named("Test")) { AppDatabase.getInMemoryDatabase(androidContext()) }
 }
 
