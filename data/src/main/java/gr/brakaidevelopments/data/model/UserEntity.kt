@@ -9,6 +9,8 @@ import android.net.Uri
 import android.os.Parcelable
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import gr.brakaidevelopments.domain.models.CountryEntity
+import gr.brakaidevelopments.domain.models.UserProfileState
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 

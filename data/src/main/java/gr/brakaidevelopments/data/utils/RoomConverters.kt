@@ -8,8 +8,7 @@ package gr.brakaidevelopments.data.utils
 import android.net.Uri
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import gr.brakaidevelopments.data.model.ChallengeState
-import gr.brakaidevelopments.data.model.UserProfileState
+import gr.brakaidevelopments.domain.models.ChallengeState
 import gr.brakaidevelopments.domain.utils.fromJson
 import java.util.*
 

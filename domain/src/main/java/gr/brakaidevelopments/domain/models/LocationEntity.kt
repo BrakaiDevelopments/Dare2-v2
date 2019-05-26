@@ -1,4 +1,4 @@
-package gr.brakaidevelopments.data.model
+package gr.brakaidevelopments.domain.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

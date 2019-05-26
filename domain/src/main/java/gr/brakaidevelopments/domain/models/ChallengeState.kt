@@ -1,4 +1,4 @@
-package gr.brakaidevelopments.data.model
+package gr.brakaidevelopments.domain.models
 
 enum class ChallengeState {
     APPROVED,

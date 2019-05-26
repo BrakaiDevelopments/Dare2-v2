@@ -5,10 +5,9 @@ import android.database.sqlite.SQLiteConstraintException
 import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
 import gr.brakaidevelopments.data.databaseModule
-import gr.brakaidevelopments.data.model.CountryEntity
 import gr.brakaidevelopments.data.model.LeaderBoardEntity
 import gr.brakaidevelopments.data.model.UserEntity
-import gr.brakaidevelopments.data.model.UserProfileState
+import gr.brakaidevelopments.domain.models.CountryEntity
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
@@ -136,19 +135,28 @@ class UserDaoTest : KoinTest {
                     id = UUID.randomUUID(),
                     username = "1",
                     email = "1@1.com",
-                    country = CountryEntity(countryCode = "GR", countryName = "Greece")
+                    country = CountryEntity(
+                        countryCode = "GR",
+                        countryName = "Greece"
+                    )
                 ),
                 user.copy(
                     id = UUID.randomUUID(),
                     username = "2",
                     email = "2@1.com",
-                    country = CountryEntity(countryCode = "GR", countryName = "Greece")
+                    country = CountryEntity(
+                        countryCode = "GR",
+                        countryName = "Greece"
+                    )
                 ),
                 user.copy(
                     id = UUID.randomUUID(),
                     username = "3",
                     email = "3@1.com",
-                    country = CountryEntity(countryCode = "AL", countryName = "Albania")
+                    country = CountryEntity(
+                        countryCode = "AL",
+                        countryName = "Albania"
+                    )
                 )
             )
 

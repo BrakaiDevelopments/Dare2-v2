@@ -60,7 +60,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "androidx.appcompat:appcompat:1.0.2"
-    implementation "androidx.annotation:annotation:1.0.2"
+    implementation "androidx.annotation:annotation:1.1.0-rc1"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation 'androidx.core:core-ktx:1.2.0-alpha01'
     implementation "com.orhanobut:logger:2.2.0"
@@ -75,7 +75,7 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.2'
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
@@ -85,7 +85,7 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion"
 
     // Resolve conflicts between main and test APK:
-    androidTestImplementation "androidx.annotation:annotation:1.0.2"
+    androidTestImplementation "androidx.annotation:annotation:1.1.0-rc1"
     androidTestImplementation "androidx.legacy:legacy-support-v4:1.0.0"
 //    androidTestImplementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     androidTestImplementation "androidx.appcompat:appcompat:1.0.2"

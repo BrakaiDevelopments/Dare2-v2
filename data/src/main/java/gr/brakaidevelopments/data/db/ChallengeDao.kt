@@ -6,7 +6,7 @@ import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import gr.brakaidevelopments.data.model.ChallengeEntity
-import gr.brakaidevelopments.data.model.ChallengeState
+import gr.brakaidevelopments.domain.models.ChallengeState
 import java.util.*
 
 

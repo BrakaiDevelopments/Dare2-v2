@@ -4,7 +4,13 @@ import android.content.Context
 import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
 import gr.brakaidevelopments.data.databaseModule
-import gr.brakaidevelopments.data.model.*
+import gr.brakaidevelopments.data.model.ChallengeEntity
+import gr.brakaidevelopments.data.model.CommentEntity
+import gr.brakaidevelopments.data.model.LeaderBoardEntity
+import gr.brakaidevelopments.data.model.UserEntity
+import gr.brakaidevelopments.domain.models.ChallengeState
+import gr.brakaidevelopments.domain.models.CountryEntity
+import gr.brakaidevelopments.domain.models.LocationEntity
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue

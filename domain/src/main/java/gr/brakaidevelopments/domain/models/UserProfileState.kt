@@ -3,7 +3,7 @@
  * Developer: Klainti brakai
  */
 
-package gr.brakaidevelopments.data.model
+package gr.brakaidevelopments.domain.models
 
 enum class UserProfileState {
     ACTIVE,

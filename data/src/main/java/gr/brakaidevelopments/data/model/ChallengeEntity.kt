@@ -7,6 +7,8 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import gr.brakaidevelopments.domain.models.ChallengeState
+import gr.brakaidevelopments.domain.models.LocationEntity
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 

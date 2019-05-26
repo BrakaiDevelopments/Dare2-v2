@@ -4,10 +4,9 @@ import android.content.Context
 import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
 import gr.brakaidevelopments.data.databaseModule
-import gr.brakaidevelopments.data.model.CountryEntity
 import gr.brakaidevelopments.data.model.LeaderBoardEntity
 import gr.brakaidevelopments.data.model.UserEntity
-import gr.brakaidevelopments.data.model.UserProfileState
+import gr.brakaidevelopments.domain.models.CountryEntity
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
