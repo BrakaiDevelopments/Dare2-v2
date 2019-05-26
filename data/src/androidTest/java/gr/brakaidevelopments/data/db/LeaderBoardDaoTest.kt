@@ -6,7 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import gr.brakaidevelopments.data.databaseModule
 import gr.brakaidevelopments.data.model.LeaderBoardEntity
 import gr.brakaidevelopments.data.model.UserEntity
-import gr.brakaidevelopments.domain.models.CountryEntity
+import gr.brakaidevelopments.domain.models.Country
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
@@ -114,7 +114,7 @@ class LeaderBoardDaoTest : KoinTest {
             password = "Test",
             email = "Test@test.com",
             birthday = Date(),
-            country = CountryEntity(
+            country = Country(
                 countryCode = "GR",
                 countryName = "Greece"
             ),

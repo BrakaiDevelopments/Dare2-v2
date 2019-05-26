@@ -3,10 +3,7 @@ package gr.brakaidevelopments.domain.repository
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import gr.brakaidevelopments.domain.models.LeaderBoardEntry
-import gr.brakaidevelopments.domain.models.User
-import gr.brakaidevelopments.domain.models.UserCredentials
-import gr.brakaidevelopments.domain.models.UserProfileState
+import gr.brakaidevelopments.domain.models.*
 import java.util.*
 
 interface LocalDataSource {
@@ -70,6 +67,12 @@ interface LocalDataSource {
     suspend fun updateLeaderBoardEntry(leaderBoardEntry: LeaderBoardEntry): Int
 
     suspend fun deleteLeaderBoardEntry(leaderBoardEntry: LeaderBoardEntry): Int
+
+    suspend fun getCommentsByParentID(commentId: UUID): List<Comment>
+
+    suspend fun getCommentsByParentIDPaged(commentId: UUID): DataSource.Factory<Int, Comment>
+
+    suspend fun observeCommentsByParentId(commentId: UUID): LiveData<List<Comment>>
 
 
 }

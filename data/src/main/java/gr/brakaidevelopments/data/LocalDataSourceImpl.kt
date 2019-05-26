@@ -5,14 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.DataSource
 import gr.brakaidevelopments.data.db.*
-import gr.brakaidevelopments.data.utils.asLeaderBoardEntity
-import gr.brakaidevelopments.data.utils.asLeaderBoardEntry
-import gr.brakaidevelopments.data.utils.asUser
-import gr.brakaidevelopments.data.utils.asUserEntity
-import gr.brakaidevelopments.domain.models.LeaderBoardEntry
-import gr.brakaidevelopments.domain.models.User
-import gr.brakaidevelopments.domain.models.UserCredentials
-import gr.brakaidevelopments.domain.models.UserProfileState
+import gr.brakaidevelopments.data.utils.*
+import gr.brakaidevelopments.domain.models.*
 import gr.brakaidevelopments.domain.repository.LocalDataSource
 import java.util.*
 
@@ -141,5 +135,17 @@ class LocalDataSourceImpl(
 
     override suspend fun deleteLeaderBoardEntry(leaderBoardEntry: LeaderBoardEntry): Int {
         return leaderBoardDao.deleteItem(leaderBoardEntry.asLeaderBoardEntity())
+    }
+
+    override suspend fun getCommentsByParentID(commentId: UUID): List<Comment> {
+        return commentViewDao.getCommentsByParentId(commentId).map { it.asComment() }
+    }
+
+    override suspend fun getCommentsByParentIDPaged(commentId: UUID): DataSource.Factory<Int, Comment> {
+        return commentViewDao.getCommentsByParentIdPaged(commentId).map { it.asComment() }
+    }
+
+    override suspend fun observeCommentsByParentId(commentId: UUID): LiveData<List<Comment>> {
+        return Transformations.map(commentViewDao.getCommentsByParentIdLiveData(commentId)) { it.map { item -> item.asComment() } }
     }
 }

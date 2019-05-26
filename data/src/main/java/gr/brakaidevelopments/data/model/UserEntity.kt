@@ -9,7 +9,7 @@ import android.net.Uri
 import android.os.Parcelable
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
-import gr.brakaidevelopments.domain.models.CountryEntity
+import gr.brakaidevelopments.domain.models.Country
 import gr.brakaidevelopments.domain.models.UserProfileState
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -42,7 +42,7 @@ data class UserEntity(
     @ColumnInfo(name = "birthday") @SerializedName("birthday")
     var birthday: Date,
     @Embedded @SerializedName("country")
-    var country: CountryEntity,
+    var country: Country,
     @ColumnInfo(name = "leaderBoard_id") @SerializedName("leaderBoard_id")
     var leaderBoardId: UUID,
     @ColumnInfo(name = "profile_image") @SerializedName("profile_image")

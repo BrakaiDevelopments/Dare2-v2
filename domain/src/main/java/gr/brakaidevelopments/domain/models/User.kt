@@ -12,7 +12,7 @@ data class User(
     var password: String,
     var email: String,
     var birthday: Date,
-    var country: CountryEntity,
+    var country: Country,
     var leaderBoardId: UUID,
     var profileImage: Uri,
     var userProfileState: UserProfileState

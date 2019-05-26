@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
-data class CountryEntity(
+data class Country(
     @SerializedName("country_id")
     val countryId: UUID = UUID.randomUUID(),
     @SerializedName("country_code")

@@ -8,7 +8,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import gr.brakaidevelopments.domain.models.ChallengeState
-import gr.brakaidevelopments.domain.models.LocationEntity
+import gr.brakaidevelopments.domain.models.Location
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -24,7 +24,7 @@ data class ChallengeEntity(
     @ColumnInfo(name = "description") @SerializedName("description")
     var description: String,
     @Embedded @SerializedName("location")
-    var location: LocationEntity,
+    var location: Location,
     @SerializedName("challenge_state")
     var challengeState: ChallengeState,
     @ColumnInfo(name = "up_votes") @SerializedName("up_votes")

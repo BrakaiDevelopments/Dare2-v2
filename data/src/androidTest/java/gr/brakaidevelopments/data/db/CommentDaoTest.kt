@@ -9,8 +9,8 @@ import gr.brakaidevelopments.data.model.CommentEntity
 import gr.brakaidevelopments.data.model.LeaderBoardEntity
 import gr.brakaidevelopments.data.model.UserEntity
 import gr.brakaidevelopments.domain.models.ChallengeState
-import gr.brakaidevelopments.domain.models.CountryEntity
-import gr.brakaidevelopments.domain.models.LocationEntity
+import gr.brakaidevelopments.domain.models.Country
+import gr.brakaidevelopments.domain.models.Location
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue
@@ -96,7 +96,7 @@ class CommentDaoTest : KoinTest {
             description = "TEST",
             coverImage = Uri.parse("https://via.placeholder.com/300/09f/fff.png"),
             challengeState = ChallengeState.APPROVED,
-            location = LocationEntity("Greece", "Attica", "Athens", "Litous 9")
+            location = Location("Greece", "Attica", "Athens", "Litous 9")
         )
 
         val user = UserEntity(
@@ -104,7 +104,7 @@ class CommentDaoTest : KoinTest {
             password = "Test",
             email = "Test@test.com",
             birthday = Date(),
-            country = CountryEntity(
+            country = Country(
                 countryCode = "GR",
                 countryName = "Greece"
             ),

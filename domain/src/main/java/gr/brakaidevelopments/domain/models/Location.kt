@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class LocationEntity(
+data class Location(
     @SerializedName("country")
     var country: String?,
     @SerializedName("county")
