@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.DataSource
 import gr.brakaidevelopments.data.db.*
+import gr.brakaidevelopments.data.model.CommentEntity
 import gr.brakaidevelopments.data.utils.*
 import gr.brakaidevelopments.domain.models.*
 import gr.brakaidevelopments.domain.repository.LocalDataSource
@@ -147,5 +148,57 @@ class LocalDataSourceImpl(
 
     override suspend fun observeCommentsByParentId(commentId: UUID): LiveData<List<Comment>> {
         return Transformations.map(commentViewDao.getCommentsByParentIdLiveData(commentId)) { it.map { item -> item.asComment() } }
+    }
+
+    override suspend fun getCommentByID(commentId: UUID): Comment? {
+        return commentDao.getCommentByID(commentId)?.asComment()
+    }
+
+    override suspend fun observeCommentByID(commentId: UUID): LiveData<Comment?> {
+        return Transformations.map(commentDao.getCommentByIDLiveData(commentId)) { it?.asComment() }
+    }
+
+    override suspend fun getCommentByChallengeID(challengeID: UUID): List<Comment> {
+        return commentDao.getCommentByChallengeID(challengeID).map { it.asComment() }
+    }
+
+    override suspend fun observeCommentByChallengeID(challengeID: UUID): LiveData<List<Comment>> {
+        return Transformations.map(commentDao.getCommentByChallengeIDLiveData(challengeID)) { it.map { item -> item.asComment() } }
+    }
+
+    override suspend fun getCommentByChallengeIDPaged(challengeID: UUID): DataSource.Factory<Int, Comment> {
+        return commentDao.getCommentByChallengeIDPaged(challengeID).map { it.asComment() }
+    }
+
+    override suspend fun getCommentByUserID(userId: UUID): List<CommentEntity> {
+        return commentDao.getCommentsByUserID(userId)
+    }
+
+    override suspend fun observeCommentByUserID(userId: UUID): LiveData<List<Comment>> {
+        return Transformations.map(commentDao.getCommentsByUserIDLiveData(userId)) { it.map { item -> item.asComment() } }
+    }
+
+    override suspend fun getCommentByMessage(message: String): List<Comment> {
+        return commentDao.getCommentsByMessage(message).map { it.asComment() }
+    }
+
+    override suspend fun insertComment(comment: Comment): Long {
+        return commentDao.insertItem(comment.asCommentEntity())
+    }
+
+    override suspend fun insertComments(vararg comments: Comment): List<Long> {
+        return commentDao.insertItems(comments.map { it.asCommentEntity() })
+    }
+
+    override suspend fun insertComments(comments: List<Comment>): List<Long> {
+        return commentDao.insertItems(comments.map { it.asCommentEntity() })
+    }
+
+    override suspend fun updateComment(comment: Comment): Int {
+        return commentDao.updateItem(comment.asCommentEntity())
+    }
+
+    override suspend fun deleteComment(comment: Comment): Int {
+        return commentDao.deleteItem(comment.asCommentEntity())
     }
 }

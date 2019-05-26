@@ -74,5 +74,31 @@ interface LocalDataSource {
 
     suspend fun observeCommentsByParentId(commentId: UUID): LiveData<List<Comment>>
 
+    suspend fun getCommentByID(commentId: UUID): Comment?
+
+    suspend fun observeCommentByID(commentId: UUID): LiveData<Comment?>
+
+    suspend fun getCommentByChallengeID(challengeID: UUID): List<Comment>
+
+    suspend fun observeCommentByChallengeID(challengeID: UUID): LiveData<List<Comment>>
+
+    suspend fun getCommentByChallengeIDPaged(challengeID: UUID): DataSource.Factory<Int, Comment>
+
+    suspend fun getCommentByUserID(userId: UUID): List<gr.brakaidevelopments.data.model.CommentEntity>
+
+    suspend fun observeCommentByUserID(userId: UUID): LiveData<List<Comment>>
+
+    suspend fun getCommentByMessage(message: String): List<Comment>
+
+    suspend fun insertComment(comment: Comment): Long
+
+    suspend fun insertComments(vararg comments: Comment): List<Long>
+
+    suspend fun insertComments(comments: List<Comment>): List<Long>
+
+    suspend fun updateComment(comment: Comment): Int
+
+    suspend fun deleteComment(comment: Comment): Int
+
 
 }

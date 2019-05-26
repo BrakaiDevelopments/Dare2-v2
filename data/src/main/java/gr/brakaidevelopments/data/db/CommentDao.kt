@@ -16,13 +16,13 @@ abstract class CommentDao : BaseDao<CommentEntity> {
     @Query("SELECT * FROM Comment WHERE comment_id=:commentID")
     abstract fun getCommentByIDLiveData(commentID: UUID): LiveData<CommentEntity?>
 
-    @Query("SELECT * FROM Comment WHERE comment_id=:challengeId")
-    abstract suspend fun getCommentByChallengeID(challengeId: UUID): CommentEntity?
+    @Query("SELECT * FROM Comment WHERE parent_challenge_id=:challengeId")
+    abstract suspend fun getCommentByChallengeID(challengeId: UUID): List<CommentEntity>
 
-    @Query("SELECT * FROM Comment WHERE comment_id=:challengeId")
-    abstract fun getCommentByChallengeIDLiveData(challengeId: UUID): LiveData<CommentEntity?>
+    @Query("SELECT * FROM Comment WHERE parent_challenge_id=:challengeId")
+    abstract fun getCommentByChallengeIDLiveData(challengeId: UUID): LiveData<List<CommentEntity>>
 
-    @Query("SELECT * FROM Comment WHERE comment_id=:challengeId")
+    @Query("SELECT * FROM Comment WHERE parent_challenge_id=:challengeId")
     abstract fun getCommentByChallengeIDPaged(challengeId: UUID): DataSource.Factory<Int ,CommentEntity>
 
     @Query("SELECT * FROM Comment WHERE user_id =:userId")
