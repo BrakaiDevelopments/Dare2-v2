@@ -1,7 +1,10 @@
 package gr.brakaidevelopments.domain.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class Comment(
     val id: UUID = UUID.randomUUID(),
     val user: User,
@@ -11,4 +14,4 @@ data class Comment(
     var UpVotes: Long = 0,
     var DownVotes: Long = 0,
     var createdAt: Date
-)
+) : Parcelable

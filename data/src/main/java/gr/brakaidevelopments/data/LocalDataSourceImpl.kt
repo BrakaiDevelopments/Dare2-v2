@@ -3,9 +3,9 @@ package gr.brakaidevelopments.data
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import androidx.paging.DataSource
 import gr.brakaidevelopments.data.db.*
-import gr.brakaidevelopments.data.model.CommentEntity
 import gr.brakaidevelopments.data.utils.*
 import gr.brakaidevelopments.domain.models.*
 import gr.brakaidevelopments.domain.repository.LocalDataSource
@@ -170,8 +170,8 @@ class LocalDataSourceImpl(
         return commentDao.getCommentByChallengeIDPaged(challengeID).map { it.asComment() }
     }
 
-    override suspend fun getCommentByUserID(userId: UUID): List<CommentEntity> {
-        return commentDao.getCommentsByUserID(userId)
+    override suspend fun getCommentByUserID(userId: UUID): List<Comment> {
+        return commentDao.getCommentsByUserID(userId).map { it.asComment() }
     }
 
     override suspend fun observeCommentByUserID(userId: UUID): LiveData<List<Comment>> {
@@ -200,5 +200,81 @@ class LocalDataSourceImpl(
 
     override suspend fun deleteComment(comment: Comment): Int {
         return commentDao.deleteItem(comment.asCommentEntity())
+    }
+
+    override suspend fun getAllChallenges(): List<Challenge> {
+        return challengeDao.getAllChallenges().map { it.asChallenge() }
+    }
+
+    override suspend fun getAllChallengesPaged(): DataSource.Factory<Int, Challenge> {
+        return challengeDao.getAllChallengesPaged().map { it.asChallenge() }
+    }
+
+    override suspend fun observeAllChallenges(): LiveData<List<Challenge>> {
+        return Transformations.map(challengeDao.getAllChallengesLiveData()) { it.map { item -> item.asChallenge() } }
+    }
+
+    override suspend fun getChallengeByID(challengeID: UUID): Challenge? {
+        return challengeDao.getChallengeById(challengeID)?.asChallenge()
+    }
+
+    override suspend fun observeChallengeByID(challengeID: UUID): LiveData<Challenge> {
+        return Transformations.map(challengeDao.getChallengeByIdLiveData(challengeID)) { it.asChallenge() }
+    }
+
+    override suspend fun getChallengeByTittleOrSubtittle(query: String): List<Challenge> {
+        return challengeDao.getChallengesByTitleOrSubTitle(query).map { it.asChallenge() }
+    }
+
+    override suspend fun getChallengeByState(challengeState: ChallengeState): List<Challenge> {
+        return challengeDao.getChallengeByStatus(challengeState).map { it.asChallenge() }
+    }
+
+    override suspend fun getChallengeByStatePaged(challengeState: ChallengeState): DataSource.Factory<Int, Challenge> {
+        return challengeDao.getChallengeByStatusPaged(challengeState).map { it.asChallenge() }
+    }
+
+    override suspend fun observeChallengeByState(challengeState: ChallengeState): LiveData<List<Challenge>> {
+        return challengeDao.getChallengeByStatusLiveData(challengeState).map { it.map { item -> item.asChallenge() } }
+    }
+
+    override suspend fun getChallengeUpVotes(challengeID: UUID): Long? {
+        return challengeDao.getChallengeUpVotesById(challengeID)
+    }
+
+    override suspend fun observeChallengeUpVotes(challengeID: UUID): LiveData<Long?> {
+        return challengeDao.getChallengeUpVotesByIdLiveData(challengeID)
+    }
+
+    override suspend fun getChallengeDownVotes(challengeID: UUID): Long? {
+        return challengeDao.getChallengeDownVotesById(challengeID)
+    }
+
+    override suspend fun observeChallengeDownVotes(challengeID: UUID): LiveData<Long?> {
+        return challengeDao.getChallengeDownVotesByIdLiveData(challengeID)
+    }
+
+    override suspend fun getChallengeProfileImage(challengeID: UUID): Uri? {
+        return challengeDao.getChallengeCoverImageId(challengeID)
+    }
+
+    override suspend fun insertChallenge(challenge: Challenge): Long {
+        return challengeDao.insertItem(challenge.asChallengeEntity())
+    }
+
+    override suspend fun insertChallenges(vararg challenges: Challenge): List<Long> {
+        return challengeDao.insertItems(challenges.map { it.asChallengeEntity() })
+    }
+
+    override suspend fun insertChallenges(challenges: List<Challenge>): List<Long> {
+        return challengeDao.insertItems(challenges.map { it.asChallengeEntity() })
+    }
+
+    override suspend fun updateChallenge(challenge: Challenge): Int {
+        return challengeDao.updateItem(challenge.asChallengeEntity())
+    }
+
+    override suspend fun deleteChallenge(challenge: Challenge): Int {
+        return challengeDao.deleteItem(challenge.asChallengeEntity())
     }
 }

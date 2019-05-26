@@ -84,7 +84,7 @@ interface LocalDataSource {
 
     suspend fun getCommentByChallengeIDPaged(challengeID: UUID): DataSource.Factory<Int, Comment>
 
-    suspend fun getCommentByUserID(userId: UUID): List<gr.brakaidevelopments.data.model.CommentEntity>
+    suspend fun getCommentByUserID(userId: UUID): List<Comment>
 
     suspend fun observeCommentByUserID(userId: UUID): LiveData<List<Comment>>
 
@@ -100,5 +100,42 @@ interface LocalDataSource {
 
     suspend fun deleteComment(comment: Comment): Int
 
+    suspend fun getAllChallenges(): List<Challenge>
+
+    suspend fun getAllChallengesPaged(): DataSource.Factory<Int, Challenge>
+
+    suspend fun observeAllChallenges(): LiveData<List<Challenge>>
+
+    suspend fun getChallengeByID(challengeID: UUID): Challenge?
+
+    suspend fun observeChallengeByID(challengeID: UUID): LiveData<Challenge>
+
+    suspend fun getChallengeByTittleOrSubtittle(query: String): List<Challenge>
+
+    suspend fun getChallengeByState(challengeState: ChallengeState): List<Challenge>
+
+    suspend fun getChallengeByStatePaged(challengeState: ChallengeState): DataSource.Factory<Int, Challenge>
+
+    suspend fun observeChallengeByState(challengeState: ChallengeState): LiveData<List<Challenge>>
+
+    suspend fun getChallengeUpVotes(challengeID: UUID): Long?
+
+    suspend fun observeChallengeUpVotes(challengeID: UUID): LiveData<Long?>
+
+    suspend fun getChallengeDownVotes(challengeID: UUID): Long?
+
+    suspend fun observeChallengeDownVotes(challengeID: UUID): LiveData<Long?>
+
+    suspend fun getChallengeProfileImage(challengeID: UUID): Uri?
+
+    suspend fun insertChallenge(challenge: Challenge): Long
+
+    suspend fun insertChallenges(vararg challenges: Challenge): List<Long>
+
+    suspend fun insertChallenges(challenges: List<Challenge>): List<Long>
+
+    suspend fun updateChallenge(challenge: Challenge): Int
+
+    suspend fun deleteChallenge(challenge: Challenge): Int
 
 }

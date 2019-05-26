@@ -1,8 +1,10 @@
 package gr.brakaidevelopments.data.utils
 
+import gr.brakaidevelopments.data.model.ChallengeEntity
 import gr.brakaidevelopments.data.model.CommentEntity
 import gr.brakaidevelopments.data.model.LeaderBoardEntity
 import gr.brakaidevelopments.data.model.UserEntity
+import gr.brakaidevelopments.domain.models.Challenge
 import gr.brakaidevelopments.domain.models.Comment
 import gr.brakaidevelopments.domain.models.LeaderBoardEntry
 import gr.brakaidevelopments.domain.models.User
@@ -58,4 +60,12 @@ fun CommentEntity.asComment(): Comment {
         DownVotes,
         createdAt
     )
+}
+
+fun Challenge.asChallengeEntity(): ChallengeEntity {
+    return ChallengeEntity(id, title, subTitle, description, location, challengeState, upVotes, downVotes, coverImage)
+}
+
+fun ChallengeEntity.asChallenge(): Challenge {
+    return Challenge(id, title, subTitle, description, location, challengeState, upVotes, downVotes, coverImage)
 }
