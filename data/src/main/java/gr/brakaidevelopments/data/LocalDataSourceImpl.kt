@@ -3,9 +3,13 @@ package gr.brakaidevelopments.data
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.paging.DataSource
 import gr.brakaidevelopments.data.db.*
+import gr.brakaidevelopments.data.utils.asLeaderBoardEntity
+import gr.brakaidevelopments.data.utils.asLeaderBoardEntry
 import gr.brakaidevelopments.data.utils.asUser
 import gr.brakaidevelopments.data.utils.asUserEntity
+import gr.brakaidevelopments.domain.models.LeaderBoardEntry
 import gr.brakaidevelopments.domain.models.User
 import gr.brakaidevelopments.domain.models.UserCredentials
 import gr.brakaidevelopments.domain.models.UserProfileState
@@ -23,7 +27,7 @@ class LocalDataSourceImpl(
         return userDao.getUserByID(userId)?.asUser()
     }
 
-    override suspend fun observeUserById(userId: UUID): LiveData<User> {
+    override suspend fun observeUserById(userId: UUID): LiveData<User?> {
         return Transformations.map(userDao.getUserByIDLiveData(userId)) { it?.asUser() }
     }
 
@@ -73,5 +77,69 @@ class LocalDataSourceImpl(
 
     override suspend fun deleteUser(user: User): Int {
         return userDao.deleteItem(user.asUserEntity())
+    }
+
+    override suspend fun getAllLeaderBoardEntries(): List<LeaderBoardEntry> {
+        return leaderBoardDao.getAllLeaderBoard().map { it.asLeaderBoardEntry() }
+    }
+
+    override suspend fun getLeaderBoardEntry(leaderBoardEntryId: UUID): LeaderBoardEntry? {
+        return leaderBoardDao.getLeaderBoardByID(leaderBoardEntryId)?.asLeaderBoardEntry()
+    }
+
+    override suspend fun observeLeaderBoardEntry(leaderBoardEntryId: UUID): LiveData<LeaderBoardEntry?> {
+        return Transformations.map(leaderBoardDao.getLeaderBoardByIDLiveData(leaderBoardEntryId)) { it?.asLeaderBoardEntry() }
+    }
+
+    override suspend fun getAllLeaderBoardEntriesPaged(): DataSource.Factory<Int, LeaderBoardEntry> {
+        return leaderBoardDao.getAllLeaderBoardPaged().map { it.asLeaderBoardEntry() }
+    }
+
+    override suspend fun observeAllLeaderBoardEntries(): LiveData<List<LeaderBoardEntry>> {
+        return Transformations.map(leaderBoardDao.getAllLeaderBoardLiveData()) { it.map { item -> item.asLeaderBoardEntry() } }
+    }
+
+    override suspend fun getUserPoints(userId: UUID): Long? {
+        return leaderBoardDao.getUserPoints(userId)
+    }
+
+    override suspend fun observeUserPoints(userId: UUID): LiveData<Long?> {
+        return leaderBoardDao.getUserPointsLiveData(userId)
+    }
+
+    override suspend fun getUserNumOfParticipates(userId: UUID): Long? {
+        return leaderBoardDao.getUserParticipates(userId)
+    }
+
+    override suspend fun observeUserNumOfParticipates(userId: UUID): LiveData<Long?> {
+        return leaderBoardDao.getUserParticipatesLiveData(userId)
+    }
+
+    override suspend fun getUserNumOfCompletedChallenges(userId: UUID): Long? {
+        return leaderBoardDao.getUserCompletedChallenges(userId)
+    }
+
+    override suspend fun observeUserNumOfCompletedChallenges(userId: UUID): LiveData<Long?> {
+        return leaderBoardDao.getUserCompletedChallengesLiveData(userId)
+    }
+
+    override suspend fun insertLeaderBoardEntry(leaderBoardEntry: LeaderBoardEntry): Long {
+        return leaderBoardDao.insertItem(leaderBoardEntry.asLeaderBoardEntity())
+    }
+
+    override suspend fun insertLeaderBoardEntries(vararg leaderBoardEntries: LeaderBoardEntry): List<Long> {
+        return leaderBoardDao.insertItems(leaderBoardEntries.map { it.asLeaderBoardEntity() })
+    }
+
+    override suspend fun insertLeaderBoardEntries(leaderBoardEntries: List<LeaderBoardEntry>): List<Long> {
+        return leaderBoardDao.insertItems(leaderBoardEntries.map { it.asLeaderBoardEntity() })
+    }
+
+    override suspend fun updateLeaderBoardEntry(leaderBoardEntry: LeaderBoardEntry): Int {
+        return leaderBoardDao.updateItem(leaderBoardEntry.asLeaderBoardEntity())
+    }
+
+    override suspend fun deleteLeaderBoardEntry(leaderBoardEntry: LeaderBoardEntry): Int {
+        return leaderBoardDao.deleteItem(leaderBoardEntry.asLeaderBoardEntity())
     }
 }

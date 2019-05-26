@@ -2,6 +2,8 @@ package gr.brakaidevelopments.domain.repository
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
+import gr.brakaidevelopments.domain.models.LeaderBoardEntry
 import gr.brakaidevelopments.domain.models.User
 import gr.brakaidevelopments.domain.models.UserCredentials
 import gr.brakaidevelopments.domain.models.UserProfileState
@@ -11,7 +13,7 @@ interface LocalDataSource {
 
     suspend fun findUserByID(userId: UUID): User?
 
-    suspend fun observeUserById(userId: UUID): LiveData<User>
+    suspend fun observeUserById(userId: UUID): LiveData<User?>
 
     suspend fun findUserByEmail(email: String): User?
 
@@ -36,5 +38,38 @@ interface LocalDataSource {
     suspend fun updateUser(user: User): Int
 
     suspend fun deleteUser(user: User): Int
+
+    suspend fun getAllLeaderBoardEntries(): List<LeaderBoardEntry>
+
+    suspend fun getLeaderBoardEntry(leaderBoardEntryId: UUID): LeaderBoardEntry?
+
+    suspend fun observeLeaderBoardEntry(leaderBoardEntryId: UUID): LiveData<LeaderBoardEntry?>
+
+    suspend fun getAllLeaderBoardEntriesPaged(): DataSource.Factory<Int, LeaderBoardEntry>
+
+    suspend fun observeAllLeaderBoardEntries(): LiveData<List<LeaderBoardEntry>>
+
+    suspend fun getUserPoints(userId: UUID): Long?
+
+    suspend fun observeUserPoints(userId: UUID): LiveData<Long?>
+
+    suspend fun getUserNumOfParticipates(userId: UUID): Long?
+
+    suspend fun observeUserNumOfParticipates(userId: UUID): LiveData<Long?>
+
+    suspend fun getUserNumOfCompletedChallenges(userId: UUID): Long?
+
+    suspend fun observeUserNumOfCompletedChallenges(userId: UUID): LiveData<Long?>
+
+    suspend fun insertLeaderBoardEntry(leaderBoardEntry: LeaderBoardEntry): Long
+
+    suspend fun insertLeaderBoardEntries(vararg leaderBoardEntries: LeaderBoardEntry): List<Long>
+
+    suspend fun insertLeaderBoardEntries(leaderBoardEntries: List<LeaderBoardEntry>): List<Long>
+
+    suspend fun updateLeaderBoardEntry(leaderBoardEntry: LeaderBoardEntry): Int
+
+    suspend fun deleteLeaderBoardEntry(leaderBoardEntry: LeaderBoardEntry): Int
+
 
 }
