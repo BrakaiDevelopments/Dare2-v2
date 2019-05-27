@@ -8,6 +8,7 @@ package gr.brakaidevelopments.dare2.container
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -27,7 +28,19 @@ import gr.brakaidevelopments.dare2.databinding.ActivityHomeBinding
 import gr.brakaidevelopments.domain.utils.RC_SIGN_IN
 import kotlinx.android.synthetic.main.nav_header.view.*
 
-class HomeActivity : BaseActivity(), NavDrawerInterface {
+class HomeActivity : BaseActivity(), NavDrawerInterface, View.OnClickListener {
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.profile_logout_button -> {
+                mAuth.signOut()
+                authenticate()
+            }
+            else -> {
+
+            }
+        }
+    }
 
     override fun isNavigationDrawerEnabled(enabled: Boolean) {
         if (enabled) {
@@ -42,6 +55,7 @@ class HomeActivity : BaseActivity(), NavDrawerInterface {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
+    private lateinit var binding: ActivityHomeBinding
     private val authIntent = AuthUI.getInstance()
         .createSignInIntentBuilder()
         .setAvailableProviders(
@@ -57,7 +71,7 @@ class HomeActivity : BaseActivity(), NavDrawerInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityHomeBinding = DataBindingUtil.setContentView(
+        binding = DataBindingUtil.setContentView(
             this,
             R.layout.activity_home
         )
@@ -73,7 +87,9 @@ class HomeActivity : BaseActivity(), NavDrawerInterface {
         binding.navigationView.setupWithNavController(navController)
 
         Glide.with(this).load(mAuth.currentUser?.photoUrl).into(binding.navigationView.getHeaderView(0).profile_picture)
-        binding.navigationView.getHeaderView(0).profile_username.text = mAuth.currentUser?.email
+        binding.navigationView.getHeaderView(0).profile_username.text = mAuth.currentUser?.displayName ?: "N/A"
+        binding.navigationView.getHeaderView(0).profile_email.text = mAuth.currentUser?.email
+        binding.navigationView.getHeaderView(0).profile_logout_button.setOnClickListener(this)
 
 
         if (mAuth.currentUser == null)
@@ -108,6 +124,11 @@ class HomeActivity : BaseActivity(), NavDrawerInterface {
 
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
+                Glide.with(this).load(mAuth.currentUser?.photoUrl)
+                    .into(binding.navigationView.getHeaderView(0).profile_picture)
+                binding.navigationView.getHeaderView(0).profile_username.text = mAuth.currentUser?.displayName ?: "N/A"
+                binding.navigationView.getHeaderView(0).profile_email.text = mAuth.currentUser?.email
+                binding.navigationView.getHeaderView(0).profile_logout_button.setOnClickListener(this)
             } else {
                 Toast.makeText(this, "Login failed: ${response?.error?.localizedMessage}", Toast.LENGTH_LONG).show()
                 startActivityForResult(

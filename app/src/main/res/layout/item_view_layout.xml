@@ -4,7 +4,8 @@
   ~ Developer: Klainti brakai
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="viewModel" type="gr.brakaidevelopments.dare2.home.HomeViewModel"/>
         <variable name="lifecycleOwner" type="androidx.lifecycle.LifecycleOwner"/>
@@ -12,6 +13,53 @@
     <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    tools:srcCompat="@tools:sample/avatars"
+                    android:id="@+id/dashboard_profile_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="@string/content_description"/>
+            <TextView
+                    android:text="@string/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dashboard_username"
+                    app:layout_constraintStart_toEndOf="@+id/dashboard_profile_image"
+                    app:layout_constraintTop_toTopOf="@+id/dashboard_profile_image" android:layout_marginStart="8dp"/>
+            <TextView
+                    android:text="@string/createdat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dashboard_createdAt"
+                    app:layout_constraintTop_toBottomOf="@+id/dashboard_username"
+                    app:layout_constraintStart_toEndOf="@+id/dashboard_profile_image"
+                    android:layout_marginStart="8dp" android:layout_marginTop="8dp"/>
+            <com.google.android.material.button.MaterialButton
+                    android:text="@string/join_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dashboard_join_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dashboard_username"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="300dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+                    android:id="@+id/imageView2" app:layout_constraintTop_toBottomOf="@+id/dashboard_profile_image"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 </layout>

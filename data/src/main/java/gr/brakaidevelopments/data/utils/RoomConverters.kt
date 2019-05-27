@@ -9,6 +9,7 @@ import android.net.Uri
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import gr.brakaidevelopments.domain.models.ChallengeState
+import gr.brakaidevelopments.domain.models.UserProfileState
 import gr.brakaidevelopments.domain.utils.fromJson
 import java.util.*
 

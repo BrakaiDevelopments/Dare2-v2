@@ -19,6 +19,7 @@
     <string name="options_option">Options</string>
     <string name="navigation_drawer_header_content_description">Profile_picture</string>
     <string name="navigation_drawer_header_title">Username</string>
+    <string name="navigation_drawer_header_sub_title">Email</string>
     <string name="username_hint">Email / Username</string>
     <string name="password_hint">Password</string>
     <string name="remember_me_hint">Remember me</string>
@@ -26,4 +27,8 @@
     <string name="content_description">TODO</string>
     <string name="password_confirm_hint">Confirm password</string>
     <string name="channel_name">Dareto</string>
+    <string name="sign_out_text">Sign out</string>
+    <string name="username">Username</string>
+    <string name="createdat">CreatedAt</string>
+    <string name="join_button">Join</string>
 </resources>
