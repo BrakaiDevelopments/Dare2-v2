@@ -55,10 +55,39 @@
                     android:layout_marginEnd="8dp"/>
             <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="300dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
-                    android:id="@+id/imageView2" app:layout_constraintTop_toBottomOf="@+id/dashboard_profile_image"
+                    android:layout_height="250dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+                    android:id="@+id/dashboard_preview"
+                    app:layout_constraintTop_toBottomOf="@+id/dashboard_profile_image"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"/>
+                    android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
+                    android:contentDescription="@string/content_description"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/content_description"
+                    app:srcCompat="@drawable/ic_thumb_up_purple_500_24dp"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:id="@+id/dashboard_thumbs_up" app:layout_constraintTop_toBottomOf="@+id/dashboard_preview"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/content_description"
+                    app:srcCompat="@drawable/ic_thumb_down"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:id="@+id/dashboard_thumbs_down"
+                    app:layout_constraintTop_toBottomOf="@+id/dashboard_preview"
+                    app:layout_constraintStart_toEndOf="@+id/dashboard_thumbs_up"/>
+            <TextView
+                    android:text="0 / 0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dashboard_thumbs_up_down"
+                    app:layout_constraintStart_toEndOf="@+id/dashboard_thumbs_down"
+                    android:layout_marginStart="8dp" app:layout_constraintBottom_toBottomOf="@+id/dashboard_thumbs_down"
+                    app:layout_constraintTop_toTopOf="@+id/dashboard_thumbs_down"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
